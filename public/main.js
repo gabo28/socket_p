@@ -18,8 +18,6 @@ const alert = (message, type) => {
 }
 
 
-
-
 Array.from(formsadd).forEach(form => {
   form.addEventListener('submit', event => {
     if (!form.checkValidity()) {
@@ -58,7 +56,6 @@ Array.from(formsfind).forEach(form => {
 
 
 socket.on('server:findData', (mensaje) =>{
-  console.log(mensaje);
   if(!mensaje.error) saldotext.innerHTML = mensaje.data.saldo
   else saldotext.innerHTML = 'La cuenta no existe :('
 })  

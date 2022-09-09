@@ -15,7 +15,6 @@ const io = new Server(httpServer, {});
 
 io.on("connection", (socket) => {
     console.log(`El cliente ${socket.id} se ha CONECTADO`);
-
     socket.on('client:sendData', (data) => {
         fs.writeFile('datos.txt', data.cuenta + ',' + data.saldo + '\n', { flag: 'a' }, (err) => {
             socket.emit('server:sendData', { error: false, mensaje: 'La cuenta '+data.cuenta+' se ha guardado de manera exitosa!!!' })
@@ -27,7 +26,6 @@ io.on("connection", (socket) => {
 
 
     socket.on('client:findData', (mensaje) => {
-        console.log(mensaje);
         fs.readFile('datos.txt', 'utf8', (err, file) => {
             const datos = file.split('\n')
                 .map(x => ({ "cuenta": x.slice(0, x.indexOf(',')), "saldo": x.slice(x.indexOf(',') + 1) }))
